@@ -30,7 +30,7 @@ class subes:
      
         self.df = pd.read_sql_table(nome, con)
     
-    def info(self):
+    def desc(self):
         print("Nome:", self.nome)
         print("Latitude:", self.latitude)
         print("Longitude:", self.longitude)  
@@ -42,7 +42,7 @@ class subes:
 def main():
     print("Teste Classe:")
     abr = subes ('JPS.xlsx')
-    abr.info()
+    abr.descr()
     #print(abr.nome)
     #abr.resumo()
 
