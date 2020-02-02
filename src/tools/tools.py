@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-import sqlalchemy as sql
+import sqlalchemy as bd
 from dotenv import load_dotenv, find_dotenv
 import os
 
@@ -12,20 +12,28 @@ def connect_bd():
     database_con_string = os.environ.get("DATABASE_CON")
     
     #Conexão
-    engine = sql.create_engine(database_con_string)
+    engine = bd.create_engine(database_con_string)
     return engine
 
 
-    
 
-#Diretório Local dos Dados
-dados_path = os.environ.get("DADOS_PATH")
 class subes:
 
     def __init__(self, nome):
-        con = connect_bd()
-        self.df = pd.read_sql_table(nome, con)
+        temp = nome.rstrip('.xlsx')
         
+        con = connect_bd()
+        con.begin()
+        info = con.execute('SELECT Nome, Latitude, Longitude FROM Info WHERE Abrv = "{}"'.format(temp))
+        
+        self.nome, self.latitude, self.longitude = list(info)[0]
+     
+        self.df = pd.read_sql_table(nome, con)
+    
+    def info(self):
+        print("Nome:", self.nome)
+        print("Latitude:", self.latitude)
+        print("Longitude:", self.longitude)  
     
     def resumo(self):
         print(self.df.info())
@@ -33,8 +41,10 @@ class subes:
   
 def main():
     print("Teste Classe:")
-    abr = subes ('ABR.xlsx')
-    abr.resumo()
+    abr = subes ('JPS.xlsx')
+    abr.info()
+    #print(abr.nome)
+    #abr.resumo()
 
 if __name__ == "__main__":
     main() 
