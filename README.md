@@ -36,7 +36,7 @@ Organização do Projeto
     │   │   ├── __init__.py
     │   │   └── tools.py 
     │   │ 
-    ├── dados              <- Script para a geração de Dados 
+    │   ├── dados              <- Script para a geração de Dados 
     │   │   └── create-mysql-db.py
     │   │
     │   ├── atributos      <- Script para transformar conjunto de dados em atributos para modelos
