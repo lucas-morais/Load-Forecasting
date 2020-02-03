@@ -3,55 +3,55 @@ Load-Forecasting
 
 Projeto para previsão de carga utilizando dados de subestações da Paraíba
 
-Project Organization
+Organização do Projeto
 ------------
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    ├── Makefile           <- Makefile com comandos: (vazio)
+    ├── README.md          <- README com a hierarquia do prjeto.
+    ├── dados
+    │   ├── externos       <- Dados de fontes complementares. Ex.:Clima
+    │   ├── interim        <- Dados intermidiários.
+    │   ├── processados    <- Conjunto de Dados final. Pronto para ser submetido ao modelo
+    │   └── brutos         <- Dados originais. Não transformados.
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── docs               <-Documentação Gerada com Sphinx
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    ├── models             <- Modelos treinados e sumarizados
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks          <- Jupyter notebooks. Notebooks com análises interativas e Demonstações Teóricas
+    │                         
+    ├── referencias        <- Dicionário de dados, referências bibliográficas e Bibliotecas.
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    ├── relatorios         <- Arquivos gerados com LaTex, Markdown e HTML
+    │   └── figuras        <- Figuras geradas para o relatório
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    ├── requirementos.txt  <- Requrimentos para reprodução do prjeto.
+    │                         
+    ├── setup.py           <- Faz o projeto instalável
+    ├── src                <- Source code para o prjeto.
+    │   ├── __init__.py    <- Faz de src um módulo
     │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
+    │   ├── modulos        <- Biclioteca para manipulação de dados 
+    │   │   ├── __init__.py
+    │   │   └── tools.py  
+    │   │     
+    ├── dados              <- Script para a geração de Dados 
+    │   │   └── create-mysql-db.py
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
+    │   ├── atributos      <- Script para transformar conjunto de dados em atributos para modelos
+    │   │   └── eng-de-atributos.py
     │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
+    │   ├── modelos        <- Scripts para treinamento e predição 
+    │   │   ├── modelo_predicao.py
+    │   │   └── modelo_treino.py
     │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
+    │   └── visualizacao   <- Scripts para criação de visualizações explanatórias
+    │       └── visualizar.py
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.testrun.org
 
 
 --------
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+<p><small>Projeto baseado em <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
