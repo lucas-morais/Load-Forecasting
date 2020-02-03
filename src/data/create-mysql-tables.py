@@ -52,6 +52,7 @@ for nome in dados:
                             .astype(str).apply(' '.join, 1), format='%d %m %Y %H %M')
     df.set_index('data', inplace=True)
     df.drop(columns=['DIA','MES','ANO','HORA','MINUTO'], axis=1, inplace=True)
-    df.to_sql(nome.rstrip('.csv'), engine, if_exists = 'replace')
-    print("Tabela",nome, "adicionada ao BD Subestações")
-
+    temp = nome.rstrip('.xlsx')
+    df.to_sql(temp, engine, if_exists = 'replace')
+    print("Tabela",temp, "adicionada ao BD Subestações")
+    

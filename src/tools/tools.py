@@ -42,7 +42,7 @@ class subes:
 def main():
     print("Teste Classe:")
     abr = subes ('JPS.xlsx')
-    abr.descr()
+    abr.desc()
     #print(abr.nome)
     #abr.resumo()
 
