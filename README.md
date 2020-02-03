@@ -35,7 +35,7 @@ Organização do Projeto
     │   ├── modulos        <- Biclioteca para manipulação de dados 
     │   │   ├── __init__.py
     │   │   └── tools.py 
-    │   │     
+    │   │ 
     ├── dados              <- Script para a geração de Dados 
     │   │   └── create-mysql-db.py
     │   │
