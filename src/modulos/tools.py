@@ -29,7 +29,7 @@ class subes:
         self.nome, self.latitude, self.longitude = list(info)[0]
      
         self.df = pd.read_sql_table(nome, con)
-    
+
     def desc(self):
         print("Nome:", self.nome)
         print("Latitude:", self.latitude)
@@ -37,15 +37,19 @@ class subes:
     
     def resumo(self):
         print(self.df.info())
-  
-  
+
+    def missing(self):
+        self.df.replace(0,np.nan, inplace = True)
+
+    
+
 def main():
     print("Teste Classe:")
-    abr = subes ('JPS.xlsx')
-    abr.desc()
-    #print(abr.nome)
-    #abr.resumo()
-
+    jps = subes ('JPS')
+    jps.missing()
+    jps.desc()
+    jps.resumo()
+    
 if __name__ == "__main__":
     main() 
 
