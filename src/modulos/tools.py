@@ -4,6 +4,7 @@ import sqlalchemy as bd
 from dotenv import load_dotenv, find_dotenv
 import os
 import matplotlib.pyplot as plt
+
 def connect_bd():
     dotenv_path = find_dotenv()
     load_dotenv(dotenv_path)
@@ -44,10 +45,6 @@ def count_missing(df, col):
     return missing 
 
 
-
-
-
-
 class subes:
 
     def __init__(self, nome):
@@ -60,9 +57,10 @@ class subes:
         self.nome, self.latitude, self.longitude = list(info)[0]
      
         self.df = pd.read_sql_table(nome, con)
-        self.df.index = pd.DatetimeIndex(self.df.index)
+        self.df['data'] = pd.DatetimeIndex(self.df['data'])
+        self.df.set_index('data', inplace= True)
         self.cols = self.df.columns.values
-
+        
     def desc(self):
         print("Nome:", self.nome)
         print("Latitude:", self.latitude)
@@ -105,11 +103,29 @@ class missingAnalysis:
         plt.xlabel("Data")
         plt.title("Dados Missing - {}".format(col))
         plt.show()
+    
+    def plot_imputed(self,org, im):
+        nome = org.name
+        df_imp = pd.concat([org, im],axis = 1)
+        df_imp.columns = ['Original', 'Imputado']
+        #df_imp['Col_Data'] = df_imp.index.values
+        #df_imp['Map'] = (df_imp['Original']==df_imp['Imputado'])
+      
+        #df_imp.plot.scatter(x = 'Col_Data', y='Imputado',c= df_imp['Map'].apply(lambda x:color[str(x)]))
+        plt.plot(df_imp['Imputado'], marker = 'o', c = 'r' )
+        plt.plot(df_imp['Original'], marker = 'o', c = 'b')
+        plt.xlabel = ("Data")
+        plt.ylabel("Potência")
+        plt.title("Dados Imputados - {}".format(nome))
+        
+        plt.show()
+
+
 
     def imputation(self, col, ini, fim,method = 'time'):
-        
-        mask = (self.df['data']>ini) & (self.df['data']<fim)
-        self.imp = self.df[col][mask]
+        print(self.df[ini:fim])
+        # mask = (self.df>ini) & (self.df.fim))
+        self.imp = self.df[col][ini:fim]
         self.imp = self.imp.interpolate(method = method)
 
 
@@ -119,14 +135,19 @@ def main():
     jps = subes ('JPS')
     jps.missing()
     jps.desc()
-    #print(jps.cols[0])
-    
+    jps.resumo()
+        
     miss = missingAnalysis(jps.df)
     
     miss.count_gaps(jps.cols[1:3])
     #miss.plot_missing(jps.cols[1])
+    ini = '2010-03-01'
+    fim = '2010-03-31'
+
+    miss.imputation(jps.cols[1], ini = ini, fim = fim)
+    df = miss.df.loc[ini:fim, jps.cols[1]]
+    miss.plot_imputed (df, miss.imp)
     
-    miss.imputation(jps.cols[1], ini = '2009-12', fim = '2010-02')
     #print(miss.imp.columns.values())
     #l = miss.gaps[jps.cols[1]]
     #print(l[1:10])
