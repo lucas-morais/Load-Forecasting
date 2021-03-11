@@ -21,23 +21,27 @@ info = []
 dados = []
 
 for filename in os.listdir(dados_path):
-    if filename.endswith(".csv"):
+    if filename.startswith("coordenadas"):
         info.append(filename)
-    elif filename.endswith(".xlsx"):
+    else:
         dados.append(filename)
 
 # 2. Criando Tabela de infos
 
 #String de conexão com MySQL
-database_con_string = os.environ.get("DATABASE_CON")
+database_con_string = os.environ.get("CONEXAO")
 
 #Conexão 
 engine = create_engine(database_con_string)
 
 fl = dados_path+info[0]
-df_info = pd.read_csv(fl)
+print(fl)
+df_info = pd.read_excel(fl, engine="openpyxl")
+df_info = df_info.dropna(axis=0, how="all")
+print(df_info)
 
-#print(df_info.head())
+
+
 df_info.to_sql("Info", engine, if_exists='replace')
 print("Tabela Info adicionada ao BD Subestações")
 
@@ -46,13 +50,16 @@ print("Tabela Info adicionada ao BD Subestações")
 
 for nome in dados:
     fl = dados_path+nome
-    df = pd.read_excel(fl)
+    
+    df = pd.read_excel(fl, engine="openpyxl")
     #Transforma variáveis no tipo datetime
     df['data'] = pd.to_datetime(df[['DIA','MES','ANO','HORA','MINUTO']]
                             .astype(str).apply(' '.join, 1), format='%d %m %Y %H %M')
     df.set_index('data', inplace=True)
     df.drop(columns=['DIA','MES','ANO','HORA','MINUTO'], axis=1, inplace=True)
+    print(df)
+    
     temp = nome.rstrip('.xlsx')
     df.to_sql(temp, engine, if_exists = 'replace')
     print("Tabela",temp, "adicionada ao BD Subestações")
-    
+        

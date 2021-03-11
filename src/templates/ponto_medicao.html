@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+{% block title %} Load Forecasting {% endblock %}
+{% block body %}
+<div class="row" style=" height:450px; background-color: #239B56">
+    <div class="col-3"> 
+        <h3>Menu</h3>
+        
+    </div>
+    <div class="col-9">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Estatística</th>
+                <th scope="col">Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for key, value in resumo.items() %}
+                <tr>
+                    <td>{{key}}</td>
+                    <td>{{value}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+          </table>
+    </div>
+</div>
+    
+{% endblock %}

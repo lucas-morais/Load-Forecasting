@@ -1,0 +1,36 @@
+{% extends "template.html" %}
+{% block title %} Load Forecasting {% endblock %}
+{% block body %}
+<div class="row" style=" height:450px; background-color: #239B56">
+    <div class="col-3"> 
+        <h3>Menu</h3>
+        <form action="{{url_for('pagina_ponto_medicao')}}" method="post">
+            <div class="form-group">
+                <label for="subestacao">Subestação:</label>
+                <select class="form-control" id="subestacao" name="barra">
+                {% for barra in pontos%}
+                    <option>{{barra}}</option>
+                {% endfor %}
+                </select>
+                
+            </div>
+            <div class="form-group">
+                <label for="data_inicio">Data inicio:</label>
+                <input type="date" class="form-control" id="data_inicio" name="data_inicio">
+            </div>
+            <div class="form-group">
+                <label for="data_fim">Data fim:</label>
+                <input type="date" class="form-control" id="data_fim" name="data_fim">
+              </div>
+              <div class="form-group">
+                <input type="hidden" class="form-control" name="sigla", value="{{sigla}}">
+              </div>
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+        </form>
+    </div>
+    <div class="col-9">
+        <h1>{{nome}}</h1>
+    </div>
+</div>
+    
+{% endblock %}

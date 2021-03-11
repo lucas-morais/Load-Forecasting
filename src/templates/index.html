@@ -1,0 +1,21 @@
+{% extends "template.html" %}
+{% block title %} Load Forecasting {% endblock %}
+{% block body %}
+<div class="row" style=" height:450px; background-color: #239B56">
+    <div class="col-3">
+        <form action="{{url_for('pagina_subestacao')}}" method="post">
+            <div class="form-group">
+                <label for="subestacao">Subestação:</label>
+                <select class="form-control" id="subestacao" name="subestacao">
+                {% for key, value in subestacoes.items()%}
+                    <option>{{key}}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirmar</button>
+        </form>
+    </div>    
+    <div class="col-9">{%include "mapa.html"%}</div>
+</div>
+    
+{% endblock %}
